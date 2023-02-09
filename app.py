@@ -4,11 +4,13 @@ import utils
 import json
 
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:?charset=utf-8'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JSON_AS_ASCII'] = False
+db = SQLAlchemy(app)
+
 with app.app_context():
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:?charset=utf-8'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['JSON_AS_ASCII'] = False
-    db = SQLAlchemy(app)
     db.create_all()
 
 
@@ -234,4 +236,4 @@ with app.app_context():
             return 201
 
 app.run()
-#f
+# f
